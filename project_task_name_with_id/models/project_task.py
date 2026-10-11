@@ -15,7 +15,6 @@ class ProjectTask(models.Model):
             if not task.id:
                 continue
             task.display_name = f"[{task.id}] {task.display_name}"
-        return
 
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):
