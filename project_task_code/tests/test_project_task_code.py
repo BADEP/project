@@ -5,6 +5,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestProjectTaskCode(BaseCommon):
+    _test_user_groups = None
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -40,28 +42,28 @@ class TestProjectTaskCode(BaseCommon):
         result = project_task.name_search("TEST-123")
         self.assertIn(
             project_task.id,
-            map(lambda x: x[0], result),
+            (x[0] for x in result),
             f"Task with code {project_task.code} should be in the results",
         )
 
         result = project_task.name_search("TEST")
         self.assertIn(
             project_task.id,
-            map(lambda x: x[0], result),
+            (x[0] for x in result),
             f"Task with code {project_task.code} should be in the results",
         )
 
         result = project_task.name_search("much")
         self.assertIn(
             project_task.id,
-            map(lambda x: x[0], result),
+            (x[0] for x in result),
             f"Task with code {project_task.code} should be in the results",
         )
 
         result = project_task.name_search("20232")
         self.assertNotIn(
             project_task.id,
-            map(lambda x: x[0], result),
+            (x[0] for x in result),
             f"Task with code {project_task.code} should not be in the results",
         )
 

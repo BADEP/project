@@ -21,13 +21,13 @@ Sequential Code for Tasks
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fproject-lightgray.png?logo=github
-    :target: https://github.com/OCA/project/tree/19.0/project_task_code
+    :target: https://github.com/OCA/project/tree/20.0/project_task_code
     :alt: OCA/project
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/project-19-0/project-19-0-project_task_code
+    :target: https://translation.odoo-community.org/projects/project-20-0/project-20-0-project_task_code
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/project&target_branch=19.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/project&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -47,11 +47,12 @@ To choose how the tasks of a project are identified, you must:
 1. Go to Project > Configuration > Projects and open a project.
 2. In the Settings tab, set "Task Name Display" to:
 
-   - "Number and Title" (default) to show the task number followed by
-     its title.
-   - "Number only" to show the task number alone. Titles are still
-     stored (so, for instance, tasks created from an incoming email keep
-     the mail subject) but they are neither displayed nor required.
+   -  "Number and Title" (default) to show the task number followed by
+      its title.
+   -  "Number only" to show the task number alone. Titles are still
+      stored (so, for instance, tasks created from an incoming email
+      keep the mail subject) but they are neither displayed nor
+      required.
 
 To change the task code sequence, you must:
 
@@ -74,7 +75,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/project/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/project/issues/new?body=module:%20project_task_code%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/project/issues/new?body=module:%20project_task_code%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -91,21 +92,21 @@ Authors
 Contributors
 ------------
 
-- Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
-- Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
-- Ana Juaristi <anajuarist@avanzosc.es>
-- Vicent Cubells <vicent.cubells@tecnativa.com>
-- Rodrigo Ferreira <rodrigosferreira91@gmail.com>
-- Damien Bouvy <dbo@odoo.com>
-- `CorporateHub <https://corporatehub.eu/>`__
+-  Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
+-  Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+-  Ana Juaristi <anajuarist@avanzosc.es>
+-  Vicent Cubells <vicent.cubells@tecnativa.com>
+-  Rodrigo Ferreira <rodrigosferreira91@gmail.com>
+-  Damien Bouvy <dbo@odoo.com>
+-  `CorporateHub <https://corporatehub.eu/>`__
 
-  - Alexey Pelykh <alexey.pelykh@corphub.eu>
+   -  Alexey Pelykh <alexey.pelykh@corphub.eu>
 
-- Saran Lim. <saranl@ecosoft.co.th>
-- Tharathip Chaweewongphan <tharathipc@ecosoft.co.th>
-- Ruchir Shukla <ruchir@bizzappdev.com>
-- Nedas Žilinskas <nedas.zilinskas@avoin.systems>
-- Jasmin Solanki <jasmin.solanki@forgeflow.com>
+-  Saran Lim. <saranl@ecosoft.co.th>
+-  Tharathip Chaweewongphan <tharathipc@ecosoft.co.th>
+-  Ruchir Shukla <ruchir@bizzappdev.com>
+-  Nedas Žilinskas <nedas.zilinskas@avoin.systems>
+-  Jasmin Solanki <jasmin.solanki@forgeflow.com>
 
 Maintainers
 -----------
@@ -120,6 +121,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/project <https://github.com/OCA/project/tree/19.0/project_task_code>`_ project on GitHub.
+This module is part of the `OCA/project <https://github.com/OCA/project/tree/20.0/project_task_code>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

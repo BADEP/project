@@ -5,7 +5,7 @@
         <field name="model">project.project</field>
         <field name="inherit_id" ref="project.edit_project" />
         <field name="arch" type="xml">
-            <group name="extra_settings" position="inside">
+            <group name="other_section" position="inside">
                 <field name="task_name_display" widget="radio" />
             </group>
         </field>
@@ -47,7 +47,7 @@
     <record id="project_task_code_kanban_view" model="ir.ui.view">
         <field name="name">project.task.code.kanban</field>
         <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.view_task_kanban" />
+        <field name="inherit_id" ref="project.view_task_card" />
         <field name="priority" eval="100" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="before">
