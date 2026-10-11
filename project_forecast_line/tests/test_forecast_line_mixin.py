@@ -14,12 +14,12 @@ class TestForecastLineMixin(BaseForecastRoleTest):
         self.assertIn(
             self.forecast_line_one,
             lines,
-            "Should find the linked forecast line",  # noqa:E501
+            "Should find the linked forecast line",
         )
         self.assertNotIn(
             self.forecast_line_other,
             lines,
-            "Should not find lines linked to other IDs",  # noqa:E501
+            "Should not find lines linked to other IDs",
         )
         self.assertEqual(len(lines), 2)
 
@@ -30,7 +30,7 @@ class TestForecastLineMixin(BaseForecastRoleTest):
         self.assertIn(
             self.forecast_line_one,
             lines,
-            "This should fetch line 2 and not Line 1",  # noqa:E501
+            "This should fetch line 2 and not Line 1",
         )
         self.assertEqual(len(lines), 1)
 

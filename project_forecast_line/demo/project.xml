@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="software_project_1" model="project.project">
         <field name="date_start" eval="time.strftime('%Y-%m-01 10:00:00')" />
         <field name="name">Odoo implementation</field>
-        <field name="color">3</field>
+        <field name="color" eval="3" />
         <field name="user_id" ref="base.user_demo" />
         <field
             name="type_ids"
@@ -23,7 +23,7 @@
         <field name="project_id" ref="software_project_1" />
         <field name="name">Project Management</field>
         <field name="stage_id" ref="project.project_project_stage_0" />
-        <field name="color">3</field>
+        <field name="color" eval="3" />
         <field name="create_date" eval="DateTime.now() - relativedelta(months=5)" />
         <field name="forecast_role_id" ref="forecast_role_pm" />
         <field
@@ -42,7 +42,7 @@
         <field name="project_id" ref="software_project_1" />
         <field name="name">Workshops</field>
         <field name="stage_id" ref="project.project_project_stage_0" />
-        <field name="color">3</field>
+        <field name="color" eval="3" />
         <field name="create_date" eval="DateTime.now() - relativedelta(months=5)" />
         <field name="forecast_role_id" ref="forecast_role_consultant" />
         <field
@@ -61,7 +61,7 @@
         <field name="project_id" ref="software_project_1" />
         <field name="name">Software Development</field>
         <field name="stage_id" ref="project.project_project_stage_0" />
-        <field name="color">3</field>
+        <field name="color" eval="3" />
         <field name="create_date" eval="DateTime.now() - relativedelta(months=5)" />
         <field name="forecast_role_id" ref="forecast_role_dev" />
         <field
@@ -80,7 +80,7 @@
         <field name="project_id" ref="software_project_1" />
         <field name="name">Internal Testing</field>
         <field name="stage_id" ref="project.project_project_stage_0" />
-        <field name="color">3</field>
+        <field name="color" eval="3" />
         <field name="create_date" eval="DateTime.now() - relativedelta(months=5)" />
         <field name="forecast_role_id" ref="forecast_role_consultant" />
         <field
@@ -99,7 +99,7 @@
         <field name="project_id" ref="software_project_1" />
         <field name="name">Customer Tests</field>
         <field name="stage_id" ref="project.project_project_stage_0" />
-        <field name="color">3</field>
+        <field name="color" eval="3" />
         <field name="create_date" eval="DateTime.now() - relativedelta(months=5)" />
         <field name="forecast_role_id" ref="forecast_role_consultant" />
         <field
