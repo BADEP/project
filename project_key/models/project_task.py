@@ -70,4 +70,3 @@ class Task(models.Model):
         for task in self:
             if task.key:
                 task.display_name = f"[{task.key}] {task.display_name}"
-        return

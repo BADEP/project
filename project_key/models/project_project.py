@@ -39,7 +39,6 @@ class Project(models.Model):
         for project in self:
             if project.key:
                 project.display_name = f"[{project.key}] {project.display_name}"
-        return
 
     @api.model_create_multi
     def create(self, vals_list):
