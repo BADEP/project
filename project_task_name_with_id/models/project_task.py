@@ -10,11 +10,12 @@ class ProjectTask(models.Model):
 
     @api.depends("name")
     def _compute_display_name(self):
-        super()._compute_display_name()
+        res = super()._compute_display_name()
         for task in self:
             if not task.id:
                 continue
             task.display_name = f"[{task.id}] {task.display_name}"
+        return res
 
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):

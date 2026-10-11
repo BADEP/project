@@ -13,7 +13,7 @@
     <record id="view_task_kanban" model="ir.ui.view">
         <field name="name">project.task.kanban</field>
         <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.view_task_kanban" />
+        <field name="inherit_id" ref="project.view_task_card" />
         <field name="arch" type="xml">
             <!-- Show display_name (with id) instead of just name. -->
             <xpath expr="//field[@name='name']" position="attributes">
@@ -50,7 +50,7 @@
         <field name="model">project.task</field>
         <field
             name="inherit_id"
-            ref="project.project_sharing_project_task_view_kanban"
+            ref="project.project_sharing_project_task_view_card"
         />
         <field name="arch" type="xml">
             <!-- Show display_name (with id) instead of just name. -->
