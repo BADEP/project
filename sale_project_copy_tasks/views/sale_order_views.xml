@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2023 Moduon Team S.L.
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
-    <record model="ir.ui.view" id="view_order_form_inherit_sale_project_copy_taks">
+    <record id="view_order_form_inherit_sale_project_copy_taks" model="ir.ui.view">
         <field name="name">sale.order.form.inherit.sale.project.copy.tasks</field>
         <field name="model">sale.order</field>
         <field

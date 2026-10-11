@@ -28,9 +28,11 @@ class SaleOrderLine(models.Model):
         so_model = self.env["sale.order"]
         # Check lines that need to inherit project template tasks
         sol_copy_tasks = self.filtered(
-            lambda sol: sol.is_service
-            and sol.product_id.service_tracking == "copy_tasks_in_project"
-            and sol.product_id.project_template_id
+            lambda sol: (
+                sol.is_service
+                and sol.product_id.service_tracking == "copy_tasks_in_project"
+                and sol.product_id.project_template_id
+            )
         )
         # Remove lines with tasks
         sol_copy_tasks -= (
