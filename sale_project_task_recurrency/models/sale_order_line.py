@@ -1,8 +1,7 @@
 # Copyright 2024 Tecnativa - Carlos López
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from datetime import datetime
+from datetime import UTC
 
-import pytz
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields, models
@@ -52,7 +51,7 @@ class SaleOrderLine(models.Model):
     def _get_task_date_deadline(self):
         self.ensure_one()
         product = self.product_id
-        date_now = fields.Datetime.context_timestamp(self, datetime.now())
+        date_now = fields.Datetime.context_timestamp(self, fields.Datetime.now())
         task_start_date_method = product.task_start_date_method
         # Initial deadline based on current date and time
         date_deadline = date_now.replace(hour=12, minute=0, second=0)
@@ -99,7 +98,7 @@ class SaleOrderLine(models.Model):
                 )
                 if is_end:
                     date_deadline += relativedelta(day=31)
-        return date_deadline.astimezone(pytz.UTC).replace(tzinfo=None)
+        return date_deadline.astimezone(UTC).replace(tzinfo=None)
 
     def _get_task_repeat_until(self, date_start):
         self.ensure_one()
