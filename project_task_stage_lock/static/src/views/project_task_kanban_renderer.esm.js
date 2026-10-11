@@ -2,7 +2,7 @@ import {ProjectTaskKanbanRenderer} from "@project/views/project_task_kanban/proj
 import {patch} from "@web/core/utils/patch";
 
 patch(ProjectTaskKanbanRenderer.prototype, {
-    get canResequenceGroups() {
-        return false;
-    },
+  get canResequenceGroups() {
+    return false;
+  },
 });
