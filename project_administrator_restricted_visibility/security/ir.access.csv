@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+project_project_full_manager_rule,Project: full project manager: see all,project.project,group_full_project_manager,crud,
+project_project_restricted_manager_rule,Project: restricted project manager: public project or team member,project.project,project.group_project_manager,crud,"['|', ('privacy_visibility', 'in', ['employees', 'portal']), ('allowed_internal_user_ids', 'in', user.id)]"

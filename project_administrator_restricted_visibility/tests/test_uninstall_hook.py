@@ -12,17 +12,20 @@ class TestUninstallHook(TransactionCase):
             "project_administrator_restricted_visibility.group_full_project_manager"
         )
         manager_rule = self.env.ref("project.project_project_manager_rule")
-        # Checks Restricted Administrator Group has not project manager rule
-        self.assertFalse(
-            any(set(restricted_group.rule_groups.ids) & set(manager_rule.ids))
+        full_rule = self.env.ref(
+            "project_administrator_restricted_visibility."
+            "project_project_full_manager_rule"
         )
+        # Checks Restricted Administrator Group has not project manager rule
+        self.assertFalse(manager_rule.active)
+        self.assertEqual(manager_rule.group_id, restricted_group)
         # Checks Full Administrator Group has project manager rule
-        self.assertTrue(any(set(full_group.rule_groups.ids) & set(manager_rule.ids)))
+        self.assertEqual(full_rule.group_id, full_group)
+        self.assertFalse(full_rule.domain)
 
         uninstall_hook(self.env)
 
         # Checks if the rules have been reset
-        self.assertTrue(
-            any(set(restricted_group.rule_groups.ids) & set(manager_rule.ids))
-        )
-        self.assertFalse(any(set(full_group.rule_groups.ids) & set(manager_rule.ids)))
+        self.assertTrue(manager_rule.active)
+        self.assertFalse(full_group.exists())
+        self.assertEqual(restricted_group.name, "Administrator")

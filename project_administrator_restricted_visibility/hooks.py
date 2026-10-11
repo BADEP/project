@@ -11,15 +11,8 @@ def uninstall_hook(env):
     group_full_project_manager = env.ref(
         "project_administrator_restricted_visibility.group_full_project_manager"
     )
-    env.ref("project.project_project_manager_rule").write(
-        {"groups": [(3, group_full_project_manager.id)]}
-    )
     group_full_project_manager.unlink()
     # Rename the original 'Project: Administrator' access group back to 'Administrator'
-    # and reassign the access rule for projects that it previously had.
-    env.ref("project.group_project_manager").write(
-        {
-            "name": "Administrator",
-            "rule_groups": [(4, env.ref("project.project_project_manager_rule").id)],
-        }
-    )
+    # and reactivate the access for projects that it previously had.
+    env.ref("project.group_project_manager").write({"name": "Administrator"})
+    env.ref("project.project_project_manager_rule").write({"active": True})
