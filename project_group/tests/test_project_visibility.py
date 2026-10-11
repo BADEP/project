@@ -5,6 +5,8 @@ from odoo.addons.mail.tests.common import mail_new_test_user
 
 
 class TestProjectVisibility(BaseCommon):
+    _test_user_groups = None
+
     @classmethod
     def setUpClass(cls):
         """Set up the class with initial data for tests."""
