@@ -21,13 +21,13 @@ Project Task Stage Auto State
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fproject-lightgray.png?logo=github
-    :target: https://github.com/OCA/project/tree/19.0/project_task_stage_auto_state
+    :target: https://github.com/OCA/project/tree/20.0/project_task_stage_auto_state
     :alt: OCA/project
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/project-19-0/project-19-0-project_task_stage_auto_state
+    :target: https://translation.odoo-community.org/projects/project-20-0/project-20-0-project_task_stage_auto_state
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/project&target_branch=19.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/project&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -37,12 +37,13 @@ a stage for a configured number of days.
 
 Key features:
 
-- Configure auto-done days per stage with states that you want to apply.
-- Configure auto-cancel days per stage with states that you want to
-  apply.
-- Automatic message posted in task chatter
-- Daily scheduled action to process tasks
-- Only open tasks are processed (closed states are ignored)
+-  Configure auto-done days per stage with states that you want to
+   apply.
+-  Configure auto-cancel days per stage with states that you want to
+   apply.
+-  Automatic message posted in task chatter
+-  Daily scheduled action to process tasks
+-  Only open tasks are processed (closed states are ignored)
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -62,13 +63,13 @@ closed after a certain period of time in a stage.
 
 Common use cases:
 
-- **Auto-done**: Approval workflows where silence means consent after N
-  days
-- **Auto-done**: Service level agreements (SLA) with automatic closure
-  when completed
-- **Auto-cancel**: Timeout periods where tasks expire if no action is
-  taken
-- **Auto-cancel**: Cleaning up stale tasks in waiting or review stages
+-  **Auto-done**: Approval workflows where silence means consent after N
+   days
+-  **Auto-done**: Service level agreements (SLA) with automatic closure
+   when completed
+-  **Auto-cancel**: Timeout periods where tasks expire if no action is
+   taken
+-  **Auto-cancel**: Cleaning up stale tasks in waiting or review stages
 
 Usage
 =====
@@ -80,14 +81,14 @@ To use this module, you need to:
 3. Select or create a stage
 4. Configure the automatic actions:
 
-   - Set "Auto-mark as done after days" to the desired number of days (0
-     to disable)
-   - Activate shown boolean fields for states that you want to do
-     something
-   - Set "Auto-cancel after days" to the desired number of days (0 to
-     disable)
-   - Activate shown boolean fields for states that you want to do
-     something
+   -  Set "Auto-mark as done after days" to the desired number of days
+      (0 to disable)
+   -  Activate shown boolean fields for states that you want to do
+      something
+   -  Set "Auto-cancel after days" to the desired number of days (0 to
+      disable)
+   -  Activate shown boolean fields for states that you want to do
+      something
 
 5. Verify that the scheduled action "Project: Auto-change task state by
    stage" is active in Settings > Technical > Automation > Scheduled
@@ -97,10 +98,10 @@ To use this module, you need to:
 
 **Notes**:
 
-- The counter starts from the "Last Stage Update" date, which is updated
-  each time a task changes stage
-- If both auto-done and auto-cancel are configured for the same stage
-  and both thresholds are reached, auto-done takes precedence
+-  The counter starts from the "Last Stage Update" date, which is
+   updated each time a task changes stage
+-  If both auto-done and auto-cancel are configured for the same stage
+   and both thresholds are reached, auto-done takes precedence
 
 Bug Tracker
 ===========
@@ -108,7 +109,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/project/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/project/issues/new?body=module:%20project_task_stage_auto_state%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/project/issues/new?body=module:%20project_task_stage_auto_state%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -123,8 +124,8 @@ Authors
 Contributors
 ------------
 
-- Shide (`Moduon <https://www.moduon.team/>`__)
-- rafaelbn (`Moduon <https://www.moduon.team/>`__)
+-  Shide (`Moduon <https://www.moduon.team/>`__)
+-  rafaelbn (`Moduon <https://www.moduon.team/>`__)
 
 Maintainers
 -----------
@@ -150,6 +151,6 @@ Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-Shide| |maintainer-rafaelbn| 
 
-This module is part of the `OCA/project <https://github.com/OCA/project/tree/19.0/project_task_stage_auto_state>`_ project on GitHub.
+This module is part of the `OCA/project <https://github.com/OCA/project/tree/20.0/project_task_stage_auto_state>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
