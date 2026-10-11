@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
 import random
+from typing import ClassVar
 
 from odoo import api, fields, models
 from odoo.fields import Domain
@@ -17,7 +18,7 @@ _QUICK_UPDATE_PRECOMMIT_KEY = "project_forecast_line.quick_update_task_ids"
 
 class ProjectTask(models.Model):
     _name = "project.task"
-    _inherit = ["project.task", "forecast.line.mixin"]
+    _inherit: ClassVar[list[str]] = ["project.task", "forecast.line.mixin"]
 
     forecast_role_id = fields.Many2one("forecast.role", ondelete="restrict")
     forecast_date_planned_start = fields.Date("Planned start date")
@@ -154,7 +155,7 @@ class ProjectTask(models.Model):
         if not self.forecast_role_id:
             _logger.info("skip task %s: no forecast role", self)
             return False
-        elif not self.project_id:
+        if not self.project_id:
             _logger.info("skip task %s: no project", self)
         elif self.project_id.stage_id:
             forecast_type = self.project_id.stage_id.forecast_line_type
@@ -166,13 +167,12 @@ class ProjectTask(models.Model):
             if sale_state == "cancel":
                 _logger.info("skip task %s: cancelled sale", self)
                 return False
-            elif sale_state == "sale":
+            if sale_state == "sale":
                 return True
-            else:
-                # TODO have forecast quantity if the sale is in Draft and we
-                # are not generating forecast lines from SO
-                _logger.info("skip task %s: draft sale")
-                return False
+            # TODO have forecast quantity if the sale is in Draft and we
+            # are not generating forecast lines from SO
+            _logger.info("skip task %s: draft sale")
+            return False
 
         if not self.forecast_date_planned_start or not self.forecast_date_planned_end:
             _logger.info("skip task %s: no planned dates", self)
@@ -194,7 +194,7 @@ class ProjectTask(models.Model):
                 forecast_type = "confirmed"
             else:
                 # sale_line_id which are in state draft cannot be assigned to a task.
-                return
+                return None
         else:
             _logger.debug("strange case -> undefined forecast type for %s: skip", self)
         return forecast_type
@@ -270,8 +270,7 @@ class ProjectTask(models.Model):
             )
             if to_clean:
                 to_clean.unlink()
-        lines = ForecastLine.create(forecast_vals)
-        return lines
+        return ForecastLine.create(forecast_vals)
 
     @api.model
     def _recompute_forecast_lines(self, force_company_id=None):

@@ -27,9 +27,10 @@ class TestHrLeave(BaseForecastRoleTest):
         )
 
         # Create an HR leave for this employee
-        leave_type = self.env["hr.leave.type"].create(
+        leave_type = self.env["hr.work.entry.type"].create(
             {
                 "name": "Test Leave Type",
+                "code": "Test Leave Type",
                 "requires_allocation": False,
             }
         )
@@ -39,7 +40,7 @@ class TestHrLeave(BaseForecastRoleTest):
             .create(
                 {
                     "name": "Sick Day",
-                    "holiday_status_id": leave_type.id,
+                    "work_entry_type_id": leave_type.id,
                     "date_from": "2022-03-14 08:00:00",
                     "date_to": "2022-03-15 17:00:00",
                     "employee_id": employee_no_role.id,
@@ -72,9 +73,10 @@ class TestHrLeave(BaseForecastRoleTest):
             "Employee must have a main_role_id for this test",
         )
 
-        leave_type = self.env["hr.leave.type"].create(
+        leave_type = self.env["hr.work.entry.type"].create(
             {
                 "name": "Test Leave Type 2",
+                "code": "Test Leave Type 2",
                 "requires_allocation": False,
             }
         )
@@ -84,7 +86,7 @@ class TestHrLeave(BaseForecastRoleTest):
             .create(
                 {
                     "name": "Vacation",
-                    "holiday_status_id": leave_type.id,
+                    "work_entry_type_id": leave_type.id,
                     "date_from": "2022-03-14 08:00:00",
                     "date_to": "2022-03-15 17:00:00",
                     "employee_id": self.employee_consultant.id,

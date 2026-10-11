@@ -3,7 +3,7 @@
 {
     "name": "Project Forecast Lines",
     "summary": "Project Forecast Lines",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Project",
@@ -22,7 +22,6 @@
     ],
     "data": [
         "security/forecast_line_security.xml",
-        "security/ir.model.access.csv",
         "views/sale_order_views.xml",
         "views/hr_employee_views.xml",
         "views/forecast_line_views.xml",
@@ -33,6 +32,7 @@
         "views/res_config_settings_views.xml",
         "data/ir_cron.xml",
         "data/project_data.xml",
+        "security/ir.access.csv",
     ],
     "demo": [
         "demo/forecast_role.xml",

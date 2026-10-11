@@ -5,6 +5,7 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
 
+from odoo import fields
 from odoo.tests import Form, TransactionCase, tagged
 
 
@@ -127,8 +128,8 @@ class BaseForecastRoleTest(TransactionCase):
                 "company_id": 1,
                 "type": "forecast",
                 "forecast_role_id": cls.role_developer.id,
-                "date_from": date.today(),
-                "date_to": date.today() + relativedelta(day=1),
+                "date_from": fields.Date.today(),
+                "date_to": fields.Date.today() + relativedelta(day=1),
                 "consolidated_forecast": 10.0,
                 "confirmed_consolidated_forecast": 10.0,
                 "res_model": cls.ProjectTasks._name,
@@ -142,8 +143,8 @@ class BaseForecastRoleTest(TransactionCase):
                 "company_id": 1,
                 "type": "forecast",
                 "forecast_role_id": cls.role_consultant.id,
-                "date_from": date.today(),
-                "date_to": date.today() + relativedelta(day=1),
+                "date_from": fields.Date.today(),
+                "date_to": fields.Date.today() + relativedelta(day=1),
                 "consolidated_forecast": 20.0,
                 "confirmed_consolidated_forecast": 20.0,
                 "res_model": cls.ProjectTasks._name,
@@ -156,8 +157,8 @@ class BaseForecastRoleTest(TransactionCase):
                 "company_id": 1,
                 "type": "forecast",
                 "forecast_role_id": cls.role_pm.id,
-                "date_from": date.today(),
-                "date_to": date.today() + relativedelta(day=1),
+                "date_from": fields.Date.today(),
+                "date_to": fields.Date.today() + relativedelta(day=1),
                 "consolidated_forecast": 10.0,
                 "confirmed_consolidated_forecast": 10.0,
                 "res_model": cls.ProjectTasks._name,
@@ -317,7 +318,7 @@ class TestForecastRoleEmployee(BaseForecastRoleTest):
                 "calendar_id": calendar.id,
                 "date_from": "2022-04-18 00:00:00",
                 "date_to": "2022-04-19 00:00:00",  # Easter
-                "time_type": "leave",
+                "count_as": "absence",
             }
         )
         self.env.flush_all()
@@ -362,7 +363,7 @@ class TestForecastRoleEmployee(BaseForecastRoleTest):
                 "calendar_id": calendar.id,
                 "date_from": "2022-04-18 00:00:00",
                 "date_to": "2022-04-19 00:00:00",
-                "time_type": "leave",
+                "count_as": "absence",
             }
         )
         self.env.flush_all()
@@ -425,7 +426,7 @@ class TestForecastRoleEmployee(BaseForecastRoleTest):
                 "calendar_id": calendar.id,
                 "date_from": "2022-04-18 00:00:00",
                 "date_to": "2022-04-19 00:00:00",
-                "time_type": "leave",
+                "count_as": "absence",
             }
         )
         self.env.flush_all()
@@ -457,7 +458,7 @@ class TestForecastRoleEmployee(BaseForecastRoleTest):
                 "name": "Global Company Holiday",
                 "date_from": "2022-03-14 00:00:00",
                 "date_to": "2022-03-15 00:00:00",
-                "time_type": "leave",
+                "count_as": "absence",
                 "company_id": self.env.company.id,
             }
         )
@@ -527,7 +528,7 @@ class TestForecastRoleEmployee(BaseForecastRoleTest):
                 "calendar_id": calendar.id,
                 "date_from": "2022-03-14 00:00:00",
                 "date_to": "2022-03-15 00:00:00",
-                "time_type": "leave",
+                "count_as": "absence",
             }
         )
         self.env.flush_all()
@@ -906,7 +907,16 @@ class TestForecastRoleProject(BaseForecastRoleTest):
         self.test_task_forecast_lines_consolidated_forecast()
         with Form(self.env["hr.leave"]) as form:
             form.employee_id = self.employee_consultant
-            form.holiday_status_id = self.env.ref("hr_holidays.leave_type_unpaid")
+            form.work_entry_type_id = self.env["hr.work.entry.type"].create(
+                {
+                    "name": "Unpaid",
+                    "code": "Unpaid",
+                    "count_as": "absence",
+                    "requires_allocation": False,
+                    "request_unit": "day",
+                    "unit_of_measure": "day",
+                }
+            )
             form.request_date_from = "2022-02-14"
             form.request_date_to = "2022-02-15"
         leave_request = form.save()
@@ -1099,8 +1109,8 @@ class TestForecastRoleProject(BaseForecastRoleTest):
                 "name": "TaskDiffRoles",
                 "project_id": project.id,
                 "forecast_role_id": self.role_consultant.id,
-                "forecast_date_planned_start": date.today(),
-                "forecast_date_planned_end": date.today(),
+                "forecast_date_planned_start": fields.Date.today(),
+                "forecast_date_planned_end": fields.Date.today(),
                 "allocated_hours": 8,
             }
         )

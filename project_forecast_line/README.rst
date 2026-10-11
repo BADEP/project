@@ -21,13 +21,13 @@ Project Forecast Lines
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fproject-lightgray.png?logo=github
-    :target: https://github.com/OCA/project/tree/19.0/project_forecast_line
+    :target: https://github.com/OCA/project/tree/20.0/project_forecast_line
     :alt: OCA/project
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/project-19-0/project-19-0-project_forecast_line
+    :target: https://translation.odoo-community.org/projects/project-20-0/project-20-0-project_forecast_line
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/project&target_branch=19.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/project&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -58,11 +58,11 @@ create lines with type "confirmed".
 To get the best experience using the Forecast application you may want
 to install:
 
-- project_forecast_line_holidays_public module which takes public
-  holidays into account during forecast lines creation
-- project_forecast_line_bokeh_chart module which improves the reports of
-  project_forecast_line module by using the bokeh widget available in
-  OCA/web
+-  project_forecast_line_holidays_public module which takes public
+   holidays into account during forecast lines creation
+-  project_forecast_line_bokeh_chart module which improves the reports
+   of project_forecast_line module by using the bokeh widget available
+   in OCA/web
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -79,49 +79,49 @@ Usage
 
 Forecast lines have the following data:
 
-- Forecast hours: it is positive for resources (employees) and negative
-  for things which consume time (project tasks, for instance)
-- From and To date which are the beginning and ending of the period of
-  the capacity
-- Consolidated forecast: this is a computed field, which is computed as
-  follows:
+-  Forecast hours: it is positive for resources (employees) and negative
+   for things which consume time (project tasks, for instance)
+-  From and To date which are the beginning and ending of the period of
+   the capacity
+-  Consolidated forecast: this is a computed field, which is computed as
+   follows:
 
-  - for costs (project tasks for instance) we take the absolute value of
-    the forecast hours (so it is a positive number)
-  - for resources (employee capacity for a period), we take the capacity
-    and substract all the costs for that employee on the same period. So
-    it will be positive if the employee still has some free time, and
-    negative if he is overloaded with work.
-  - this consolidated forecast is currently converted to days to ease
-    readability of the forecast report
+   -  for costs (project tasks for instance) we take the absolute value
+      of the forecast hours (so it is a positive number)
+   -  for resources (employee capacity for a period), we take the
+      capacity and substract all the costs for that employee on the same
+      period. So it will be positive if the employee still has some free
+      time, and negative if he is overloaded with work.
+   -  this consolidated forecast is currently converted to days to ease
+      readability of the forecast report
 
 Objects creating forecast lines:
 
-- employees with a forecast role will create forecast line with a
-  positive capacity and type "confirmed" for each day on which they
-  work. This information comes from their work calendar, and the
-  different roles that are linked to the employee.
-- draft sale orders (if enabled in the settings) will create forecast
-  lines of type "forecast" for each sale order line having a product
-  with a forecast role and start and end dates. The forecast hours are
-  negative
-- confirmed sale orders don't create forecast lines. This is handled by
-  the tasks created at the confirmation of the sale order
-- project tasks create forecast lines if they have a linked role and
-  planned start/end dates. The type of the line will depend on the
-  related project's stage. The forecast_hours field is based on the
-  remaining time of the task, which is spread on the work days of the
-  planned start and end date of the task. If the current date is in the
-  middle of the planned duration of the task, it is used as the start
-  date. If the planned end date is in the past the task does not
-  generate forecast lines (and you need to fix your planning). In case
-  multiple employees are assigned to the task the forecast is split
-  equally between them.
-- holiday requests create negative forecast lines with type "forecast"
-  when they are pending manager validation.
-- Validated holiday requests do not generate forecast lines, as they
-  alter the work calendar of the employee: the employee will not have a
-  positive line associated to his leave days.
+-  employees with a forecast role will create forecast line with a
+   positive capacity and type "confirmed" for each day on which they
+   work. This information comes from their work calendar, and the
+   different roles that are linked to the employee.
+-  draft sale orders (if enabled in the settings) will create forecast
+   lines of type "forecast" for each sale order line having a product
+   with a forecast role and start and end dates. The forecast hours are
+   negative
+-  confirmed sale orders don't create forecast lines. This is handled by
+   the tasks created at the confirmation of the sale order
+-  project tasks create forecast lines if they have a linked role and
+   planned start/end dates. The type of the line will depend on the
+   related project's stage. The forecast_hours field is based on the
+   remaining time of the task, which is spread on the work days of the
+   planned start and end date of the task. If the current date is in the
+   middle of the planned duration of the task, it is used as the start
+   date. If the planned end date is in the past the task does not
+   generate forecast lines (and you need to fix your planning). In case
+   multiple employees are assigned to the task the forecast is split
+   equally between them.
+-  holiday requests create negative forecast lines with type "forecast"
+   when they are pending manager validation.
+-  Validated holiday requests do not generate forecast lines, as they
+   alter the work calendar of the employee: the employee will not have a
+   positive line associated to his leave days.
 
 The creation of forecast lines is done either in real time when some
 actions are performed by the user (requesting leaves, updating the
@@ -140,7 +140,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/project/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/project/issues/new?body=module:%20project_forecast_line%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/project/issues/new?body=module:%20project_forecast_line%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -155,8 +155,8 @@ Authors
 Contributors
 ------------
 
-- Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
-- Maksym Yankin <maksym.yankin@camptocamp.com>
+-  Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
+-  Maksym Yankin <maksym.yankin@camptocamp.com>
 
 Maintainers
 -----------
@@ -171,6 +171,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/project <https://github.com/OCA/project/tree/19.0/project_forecast_line>`_ project on GitHub.
+This module is part of the `OCA/project <https://github.com/OCA/project/tree/20.0/project_forecast_line>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

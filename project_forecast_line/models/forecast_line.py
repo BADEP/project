@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
 from datetime import datetime, time
+from zoneinfo import ZoneInfo
 
 from dateutil.relativedelta import relativedelta
 
@@ -34,16 +35,12 @@ class ForecastLine(models.Model):
         index=True,
         ondelete="restrict",
     )
-    employee_id = fields.Many2one("hr.employee", string="Employee", ondelete="cascade")
+    employee_id = fields.Many2one("hr.employee", ondelete="cascade")
     employee_forecast_role_id = fields.Many2one(
-        "hr.employee.forecast.role", string="Employee Forecast Role", ondelete="cascade"
+        "hr.employee.forecast.role", ondelete="cascade"
     )
-    project_id = fields.Many2one(
-        "project.project", index=True, string="Project", ondelete="cascade"
-    )
-    task_id = fields.Many2one(
-        "project.task", index=True, string="Task", ondelete="cascade"
-    )
+    project_id = fields.Many2one("project.project", index=True, ondelete="cascade")
+    task_id = fields.Many2one("project.task", index=True, ondelete="cascade")
     sale_id = fields.Many2one(
         "sale.order",
         related="sale_line_id.order_id",
@@ -117,8 +114,7 @@ class ForecastLine(models.Model):
                 del vals["employee_id"]
         if vals:
             return super().write(vals)
-        else:
-            return True
+        return True
 
     @api.depends("employee_id", "date_from", "type", "res_model")
     def _compute_employee_forecast_line_id(self):
@@ -325,8 +321,7 @@ class ForecastLine(models.Model):
     def _company_horizon_end(self):
         company = self.env.company
         today = fields.Date.context_today(self)
-        horizon_end = today + relativedelta(months=company.forecast_line_horizon)
-        return horizon_end
+        return today + relativedelta(months=company.forecast_line_horizon)
 
     def _compute_horizon(self, date_from, date_to):
         today = fields.Date.context_today(self)
@@ -460,16 +455,18 @@ class ForecastLine(models.Model):
             granularity = company.forecast_line_granularity
             date_from = date_utils.start_of(date_from, granularity)
             date_to = date_utils.end_of(date_to, granularity) + relativedelta(days=1)
-        tzinfo = self.with_context(tz=calendar.tz or "UTC").env.tz
-        start_dt = tzinfo.localize(datetime.combine(date_from, time(0)))
-        end_dt = tzinfo.localize(datetime.combine(date_to, time(0)))
+        # resource.calendar has no tz anymore: use the resource (or company) tz
+        tzinfo = ZoneInfo(resource.tz or self.env.company.tz or "UTC")
+        start_dt = datetime.combine(date_from, time(0), tzinfo)
+        end_dt = datetime.combine(date_to, time(0), tzinfo)
         intervals = calendar._work_intervals_batch(
-            start_dt, end_dt, resources=resource
+            start_dt,
+            end_dt,
+            resources_per_tz=resource._get_resources_per_tz() if resource else None,
         )[resource.id]
-        nb_hours = sum(
+        return sum(
             (stop - start).total_seconds() / 3600 for start, stop, meta in intervals
         )
-        return nb_hours
 
     def unlink(self):
         # we routinely unlink forecast lines, let's not fill the logs with this
