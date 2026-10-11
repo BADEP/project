@@ -23,16 +23,16 @@ class SaleOrder(models.Model):
 
     def _get_order_project_data(self):
         self.ensure_one()
-        return dict(
-            partner_id=self.partner_id.id,
-            sale_order_id=self.id,
-            account_id=self.env.context.get("project_account_id")
+        return {
+            "partner_id": self.partner_id.id,
+            "sale_order_id": self.id,
+            "account_id": self.env.context.get("project_account_id")
             or self.project_account_id.id
             or self.env["account.analytic.account"]
             .create(self._prepare_analytic_account_data())
             .id,
-            name=self.name,
-        )
+            "name": self.name,
+        }
 
     def create_order_project(self):
         pp_model = self.env["project.project"]
