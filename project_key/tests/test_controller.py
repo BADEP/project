@@ -5,6 +5,8 @@ from .test_common import HttpTestCommon
 
 
 class TestController(HttpTestCommon):
+    _test_user_groups = None
+
     def test_01_project_browse(self):
         self.authenticate("admin", "admin")
         response = self.url_open("/projects/" + self.project_1.key)
@@ -18,8 +20,11 @@ class TestController(HttpTestCommon):
         response = self.url_open("/tasks/" + self.task11.key)
         self.assertEqual(response.status_code, 200)
         self.assertIn("/odoo/", response.url)
-        self.assertIn(f"{self.task11._name}", response.url)
-        self.assertIn(f"{self.task11.id}", response.url)
+        # Odoo 20 redirects tasks to /odoo/project/<project_id>/tasks/<task_id>
+        self.assertIn(
+            f"/project/{self.task11.project_id.id}/tasks/{self.task11.id}",
+            response.url,
+        )
 
     def test_03_project_browse_portal(self):
         self.authenticate(self.user_portal.login, self.user_portal.login)
