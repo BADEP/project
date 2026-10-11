@@ -22,9 +22,9 @@ class ProjectTask(models.Model):
         "this task, limiting the selectable users to be assigned to "
         "those that belongs to that category.",
     )
-    domain_hr_category_ids = fields.Binary(compute="_compute_domain_hr_category_ids")
+    domain_hr_category_ids = fields.Json(compute="_compute_domain_hr_category_ids")
     user_ids = fields.Many2many(domain="domain_user_ids")
-    domain_user_ids = fields.Binary(compute="_compute_domain_user_ids")
+    domain_user_ids = fields.Json(compute="_compute_domain_user_ids")
 
     @api.depends("user_ids", "company_id")
     def _compute_employee_ids(self):
@@ -38,7 +38,8 @@ class ProjectTask(models.Model):
     @api.depends("project_id.hr_category_ids")
     def _compute_domain_hr_category_ids(self):
         for task in self:
-            domain = []
+            # Json fields store an empty list as False (= no record allowed)
+            domain = [(1, "=", 1)]
             if task.project_id.hr_category_ids:
                 domain = [("id", "in", task.project_id.hr_category_ids.ids)]
             task.domain_hr_category_ids = domain
