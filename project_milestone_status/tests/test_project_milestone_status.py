@@ -4,6 +4,8 @@ from odoo.addons.project_milestone_status.tests.common import (
 
 
 class TestProjectMilestoneStatus(ProjectMilestoneStatusCommon):
+    _test_user_groups = None
+
     def test_check_execution_empty(self):
         project_milestone_id = self.project1.milestone_ids.browse(self.milestone1.id)
         self.assertEqual(
