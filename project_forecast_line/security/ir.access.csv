@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_forecast_line_mixin,access_forecast_line_mixin,forecast.line.mixin,base.group_user,r,
+access_forecast_line,access_forecast_line,forecast.line,base.group_user,r,
+forecast_line_comp_rule,Forecast multi-company,forecast.line,,crud,"[('company_id', 'in', company_ids)]"
+access_forecast_role,access_forecast_role,forecast.role,base.group_user,r,
+access_forecast_role_hr_user,access_forecast_role_hr_manager,forecast.role,hr.group_hr_user,crud,
+access_hr_employee_forecast_role,access_hr_employee_forecast_role,hr.employee.forecast.role,base.group_user,r,
+access_hr_employee_forecast_role_hr_user,access_hr_employee_forecast_role_hr_user,hr.employee.forecast.role,hr.group_hr_user,crud,
