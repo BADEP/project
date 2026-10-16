@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+rule_multi_company_project_tags,Project Tags Multi Company,project.tags,,crud,"[('company_id', 'in', company_ids + [False])]"
