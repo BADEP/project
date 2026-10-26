@@ -3,7 +3,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class HrTimesheetSwitch(models.TransientModel):
@@ -13,7 +13,7 @@ class HrTimesheetSwitch(models.TransientModel):
     def _domain_project_id(self):
         domain = [("allow_timesheets", "=", True)]
         if not self.env.user.has_group("hr_timesheet.group_timesheet_manager"):
-            return expression.AND(
+            return Domain.AND(
                 [
                     domain,
                     [
