@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="sale_order_software_project" model="sale.order">
         <field name="partner_id" ref="base.res_partner_2" />
@@ -18,9 +18,9 @@
     <record id="sale_order_line_pm" model="sale.order.line">
         <field name="order_id" ref="sale_order_software_project" />
         <field name="product_id" ref="project_forecast_line.product_product_pm" />
-        <field name="product_uom_qty">30</field>
+        <field name="product_uom_qty" eval="30" />
         <field name="product_uom_id" ref="uom.product_uom_hour" />
-        <field name="price_unit">295.00</field>
+        <field name="price_unit" eval="295.00" />
         <field
             name="forecast_date_start"
             eval="datetime.now() + relativedelta(weeks=2)"
@@ -37,9 +37,9 @@
             name="product_id"
             ref="project_forecast_line.product_product_consultant"
         />
-        <field name="product_uom_qty">300</field>
+        <field name="product_uom_qty" eval="300" />
         <field name="product_uom_id" ref="uom.product_uom_hour" />
-        <field name="price_unit">200.00</field>
+        <field name="price_unit" eval="200.00" />
         <field
             name="forecast_date_start"
             eval="datetime.now() + relativedelta(weeks=3)"
@@ -53,9 +53,9 @@
     <record id="sale_order_line_1" model="sale.order.line">
         <field name="order_id" ref="sale_order_software_project" />
         <field name="product_id" ref="project_forecast_line.product_product_dev" />
-        <field name="product_uom_qty">200</field>
+        <field name="product_uom_qty" eval="200" />
         <field name="product_uom_id" ref="uom.product_uom_hour" />
-        <field name="price_unit">200.00</field>
+        <field name="price_unit" eval="200.00" />
         <field
             name="forecast_date_start"
             eval="datetime.now() + relativedelta(weeks=4)"

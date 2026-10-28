@@ -778,12 +778,15 @@ class TestForecastRoleProject(BaseForecastRoleTest):
         )
         # we can take first line to check as forecast values are equal
         forecast_consultant = employee_forecast.filtered(
-            lambda x: x.res_model == self.role_model
-            and x.forecast_role_id == self.role_consultant
+            lambda x: (
+                x.res_model == self.role_model
+                and x.forecast_role_id == self.role_consultant
+            )
         )[0]
         forecast_pm = employee_forecast.filtered(
-            lambda x: x.res_model == self.role_model
-            and x.forecast_role_id == self.role_pm
+            lambda x: (
+                x.res_model == self.role_model and x.forecast_role_id == self.role_pm
+            )
         )[0]
         return forecast_consultant, forecast_pm
 
@@ -881,21 +884,21 @@ class TestForecastRoleProject(BaseForecastRoleTest):
         # Capacity (6.0h) - Total Consumption (4 * -8.0h = -32.0h) = -26.0h. -26.0 / 8.0 = -3.25 days #noqa: E501
         self.assertAlmostEqual(
             forecast_consultant.consolidated_forecast, -3.25, places=2
-        )  # noqa: E501
+        )
         # Capacity (6.0h) - Confirmed Consumption (2 * -8.0h = -16.0h) = -10.0h. -10.0 / 8.0 = -1.25 days #noqa: E501
         self.assertAlmostEqual(
             forecast_consultant.confirmed_consolidated_forecast, -1.25, places=2
-        )  # noqa: E501
+        )
         self.assertAlmostEqual(forecast_pm.forecast_hours, 2.0)
-        self.assertAlmostEqual(forecast_pm.consolidated_forecast, 0.25, places=2)  # noqa: E501
+        self.assertAlmostEqual(forecast_pm.consolidated_forecast, 0.25, places=2)
         self.assertAlmostEqual(
             forecast_pm.confirmed_consolidated_forecast, 0.25, places=2
-        )  # noqa: E501
-        res_ids = (project_1 | project_2).task_ids.ids  # noqa: E501
-        (project_1 | project_2).task_ids.unlink()  # noqa: E501
+        )
+        res_ids = (project_1 | project_2).task_ids.ids
+        (project_1 | project_2).task_ids.unlink()
         to_remove_lines = self.ForecastLine.search(
             [("res_id", "in", res_ids), ("res_model", "=", "project.task")]
-        )  # noqa: E501
+        )
         self.assertFalse(to_remove_lines.exists())
 
     @freeze_time("2022-01-01 12:00:00")
@@ -1118,14 +1121,14 @@ class TestForecastRoleProject(BaseForecastRoleTest):
         )
         self.assertAlmostEqual(
             forecast_consultant.confirmed_consolidated_forecast, -0.25, places=2
-        )  # noqa: E501
+        )
         self.assertEqual(forecast_pm.forecast_hours, 2.0)
         self.assertAlmostEqual(forecast_pm.consolidated_forecast, 0.25, places=2)
         self.assertAlmostEqual(
             forecast_pm.confirmed_consolidated_forecast, 0.25, places=2
         )
 
-    @freeze_time("2022-01-03 12:00:00")  # noqa: E501
+    @freeze_time("2022-01-03 12:00:00")
     def test_task_forecast_lines_employee_main_role(self):
         """
         Test forecast lines when employee has different roles

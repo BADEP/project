@@ -69,7 +69,7 @@ class TestProjectTask(BaseForecastRoleTest):
             "remaining_hours": 8,
         }
         task = self.ProjectTask.create(task_vals)
-        # Force line generation #noqa : E501
+        # Force line generation
         task._update_forecast_lines()
 
         forecast_lines = self.env["forecast.line"].search(
@@ -554,7 +554,7 @@ class TestProjectTask(BaseForecastRoleTest):
             [("res_model", "=", "project.task"), ("res_id", "=", task.id)]
         )
         # Original lines must still be present (not wiped by an erroneous cleanup)
-        surviving_ids = ids_first_run & set(lines_second_run.ids)  # noqa : E501
+        surviving_ids = ids_first_run & set(lines_second_run.ids)
         self.assertTrue(
             surviving_ids,
             "No forecast lines should have been deleted when task_with_lines_to_clean is empty",  # noqa : E501
@@ -636,7 +636,7 @@ class TestProjectTask(BaseForecastRoleTest):
                 "allocated_hours": 8,
                 "remaining_hours": 8,
             }
-        )  # noqa : E501
+        )
         self.assertFalse(
             task._should_have_forecast(),
             "_should_have_forecast must return False when stage has no forecast_line_type",  # noqa : E501
@@ -647,7 +647,7 @@ class TestProjectTask(BaseForecastRoleTest):
         """Missing forecast_date_planned_start → False."""
         task = self._make_qualifying_task("NoStartDate")
         task.forecast_date_planned_start = False
-        self.env.flush_all()  # noqa : E501
+        self.env.flush_all()
         self.assertFalse(
             task._should_have_forecast(),
             "_should_have_forecast must return False when planned start date is missing",  # noqa : E501
@@ -746,7 +746,7 @@ class TestProjectTask(BaseForecastRoleTest):
             }
         )
 
-        self.env.flush_all()  # noqa : E501
+        self.env.flush_all()
         # After task creation, the SO might be auto-confirmed by Odoo depending on default settings. #noqa : E501
         # So we force the SO to reach the expected state using standard actions.
         if so_state == "sale":

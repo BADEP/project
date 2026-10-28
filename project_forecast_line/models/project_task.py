@@ -119,7 +119,7 @@ class ProjectTask(models.Model):
                 continue
             employees = self.env["hr.employee"].search(
                 Domain("user_id", "in", task.user_ids.ids)
-            )  # noqa : E501
+            )
             for employee in employees:
                 if employee.role_ids:
                     task.forecast_role_id = employee.main_role_id
