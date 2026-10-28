@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
 import random
-from typing import ClassVar
 
 from odoo import api, fields, models
 from odoo.fields import Domain
@@ -18,7 +17,7 @@ _QUICK_UPDATE_PRECOMMIT_KEY = "project_forecast_line.quick_update_task_ids"
 
 class ProjectTask(models.Model):
     _name = "project.task"
-    _inherit: ClassVar[list[str]] = ["project.task", "forecast.line.mixin"]
+    _inherit = ["project.task", "forecast.line.mixin"]  # noqa: RUF012
 
     forecast_role_id = fields.Many2one("forecast.role", ondelete="restrict")
     forecast_date_planned_start = fields.Date("Planned start date")

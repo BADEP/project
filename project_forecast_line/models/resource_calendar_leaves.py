@@ -1,6 +1,5 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from typing import ClassVar
 
 from dateutil.relativedelta import relativedelta
 
@@ -10,7 +9,7 @@ from odoo.fields import Domain
 
 class ResourceCalendarLeaves(models.Model):
     _name = "resource.calendar.leaves"
-    _inherit: ClassVar[list[str]] = ["resource.calendar.leaves", "forecast.line.mixin"]
+    _inherit = ["resource.calendar.leaves", "forecast.line.mixin"]  # noqa: RUF012
 
     @api.model_create_multi
     def create(self, vals_list):

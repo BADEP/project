@@ -1,7 +1,6 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
-from typing import ClassVar
 
 from odoo import api, fields, models
 from odoo.fields import Domain
@@ -11,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 class SaleOrderLine(models.Model):
     _name = "sale.order.line"
-    _inherit: ClassVar[list[str]] = ["sale.order.line", "forecast.line.mixin"]
+    _inherit = ["sale.order.line", "forecast.line.mixin"]  # noqa: RUF012
 
     forecast_date_start = fields.Date()
     forecast_date_end = fields.Date()

@@ -1,7 +1,6 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
-from typing import ClassVar
 
 from odoo import api, fields, models
 from odoo.fields import Domain
@@ -11,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 class HrLeave(models.Model):
     _name = "hr.leave"
-    _inherit: ClassVar[list[str]] = ["hr.leave", "forecast.line.mixin"]
+    _inherit = ["hr.leave", "forecast.line.mixin"]  # noqa: RUF012
 
     @api.model_create_multi
     def create(self, vals_list):
