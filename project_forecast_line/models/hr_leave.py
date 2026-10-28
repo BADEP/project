@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 class HrLeave(models.Model):
     _name = "hr.leave"
-    _inherit = ["hr.leave", "forecast.line.mixin"]
+    _inherit = ["hr.leave", "forecast.line.mixin"]  # noqa: RUF012
 
     @api.model_create_multi
     def create(self, vals_list):

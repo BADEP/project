@@ -1,5 +1,6 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, models
@@ -8,7 +9,7 @@ from odoo.fields import Domain
 
 class ResourceCalendarLeaves(models.Model):
     _name = "resource.calendar.leaves"
-    _inherit = ["resource.calendar.leaves", "forecast.line.mixin"]
+    _inherit = ["resource.calendar.leaves", "forecast.line.mixin"]  # noqa: RUF012
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -31,10 +32,9 @@ class ResourceCalendarLeaves(models.Model):
             employees = self.env["hr.employee"].search(
                 Domain("company_id", "in", self.mapped("company_id").ids)
             )
-        roles = self.env["hr.employee.forecast.role"].search(
+        return self.env["hr.employee.forecast.role"].search(
             Domain("employee_id", "in", employees.ids)
         )
-        return roles
 
     def _update_forecast_lines(self):
         roles = self._get_resource_roles()

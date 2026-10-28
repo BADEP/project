@@ -11,8 +11,8 @@
         />
         <field
             name="image_1920"
-            type="base64"
-            file="hr/static/img/employee_fpi-image.jpg"
+            type="bytes"
+            file="hr/static/img/employee_fpi-image.webp"
         />
         <field name="employee_ids" eval="[Command.set([ref('hr.employee_fpi')])]" />
     </record>
@@ -28,8 +28,8 @@
         />
         <field
             name="image_1920"
-            type="base64"
-            file="hr/static/img/employee_han-image.jpg"
+            type="bytes"
+            file="hr/static/img/employee_han-image.webp"
         />
         <field name="employee_ids" eval="[Command.set([ref('hr.employee_han')])]" />
     </record>
@@ -45,8 +45,8 @@
         />
         <field
             name="image_1920"
-            type="base64"
-            file="hr/static/img/employee_jep-image.jpg"
+            type="bytes"
+            file="hr/static/img/employee_jep-image.webp"
         />
         <field name="employee_ids" eval="[Command.set([ref('hr.employee_jep')])]" />
     </record>
@@ -61,8 +61,8 @@
         />
         <field
             name="image_1920"
-            type="base64"
-            file="hr/static/img/employee_chs-image.jpg"
+            type="bytes"
+            file="hr/static/img/employee_chs-image.webp"
         />
         <field name="employee_ids" eval="[Command.set([ref('hr.employee_chs')])]" />
     </record>

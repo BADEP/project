@@ -569,7 +569,7 @@ class TestProjectTask(BaseForecastRoleTest):
         project = self.ProjectProject.create({"name": f"ShouldHaveProject-{name}"})
         project.stage_id = self.env.ref("project.project_project_stage_1")
         self.env.flush_all()
-        task = self.ProjectTask.create(
+        return self.ProjectTask.create(
             {
                 "name": name,
                 "project_id": project.id,
@@ -580,7 +580,6 @@ class TestProjectTask(BaseForecastRoleTest):
                 "remaining_hours": 8,
             }
         )
-        return task
 
     def test_should_have_forecast_ensure_one_raises_on_multi_record(self):
         """ensure_one() must raise when called on a multi-record set."""
@@ -758,10 +757,9 @@ class TestProjectTask(BaseForecastRoleTest):
                     sale_order.action_cancel()
                 else:
                     sale_order.with_context(disable_cancel_warning=True).action_cancel()
-        elif so_state == "draft":
-            if sale_order.state != "draft":
-                sale_order.with_context(disable_cancel_warning=True).action_cancel()
-                sale_order.action_draft()
+        elif so_state == "draft" and sale_order.state != "draft":
+            sale_order.with_context(disable_cancel_warning=True).action_cancel()
+            sale_order.action_draft()
 
         self.env.flush_all()
         self.env.invalidate_all()
@@ -805,14 +803,14 @@ class TestProjectTask(BaseForecastRoleTest):
 
     def test_set_forecast_type(self):
         # Condition 1: Project with stage ID
-        task, so = self._make_task_with_sale_line(
+        task, _so = self._make_task_with_sale_line(
             "SaleLineDraft", so_state="draft", project_stage_id=1
         )  # Stage ID: 1 --> To Do stage
         forecast_type = task.set_forecast_type()
         self.assertEqual(forecast_type, "forecast")
 
         # Condition 2: Task with SO line in sale state
-        task_2, so = self._make_task_with_sale_line(
+        task_2, _so = self._make_task_with_sale_line(
             "SaleLineConfirm", so_state="sale", project_stage_id=False
         )
         task_2.project_id.stage_id = False
@@ -821,7 +819,7 @@ class TestProjectTask(BaseForecastRoleTest):
         self.assertEqual(forecast_type, "confirmed")
 
         # Condition 3: Task with SO line in draft state → bare return (None)
-        task_3, so_3 = self._make_task_with_sale_line(
+        task_3, _so_3 = self._make_task_with_sale_line(
             "SaleLineDraftReturn", so_state="draft", project_stage_id=False
         )
         task_3.project_id.stage_id = False

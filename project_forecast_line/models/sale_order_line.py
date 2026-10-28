@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 class SaleOrderLine(models.Model):
     _name = "sale.order.line"
-    _inherit = ["sale.order.line", "forecast.line.mixin"]
+    _inherit = ["sale.order.line", "forecast.line.mixin"]  # noqa: RUF012
 
     forecast_date_start = fields.Date()
     forecast_date_end = fields.Date()
